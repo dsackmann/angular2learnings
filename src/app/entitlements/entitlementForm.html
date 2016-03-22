@@ -1,0 +1,23 @@
+<div>
+  <form (ngSubmit)="onFormSubmit()" #entitlementForm="ngForm">
+    <div>
+      <label for="name">Name</label>
+      <input type="text" class="form-control" required
+             [(ngModel)]="model.name"
+             ngControl="name" #name="ngForm">
+    </div>
+    <div>
+      <label for="transactionLimit">Transaction Limit</label>
+      <input type="number" class="form-control"
+             [(ngModel)]="model.transactionLimit"
+             ngControl="transactionLimit">
+    </div>
+    <div>
+      <label for="dailyLimit">Daily Limit</label>
+      <input type="number" class="form-control"
+             [(ngModel)]="model.dailyLimit"
+             ngControl="dailyLimit">
+    </div>
+    <button type="submit" class="btn btn-default" [disabled]="!entitlementForm.form.valid">Submit</button>
+  </form>
+</div>

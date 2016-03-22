@@ -1,0 +1,20 @@
+<h3>User </h3>
+<div>username: {{user.loginName}}</div>
+<div>userId: {{user.userId}}</div>
+<div>client: <a [routerLink]="['/Client', {id: user.clientId }]">{{user.clientId}}</a></div>
+
+<h3>User Entitlements</h3>
+<div *ngIf="userEnts.length === 0">None</div>
+<entitlement-listing *ngFor="#userEnt of userEnts" [entitlement]="userEnt" (onRevoke)="revokeUserEntitlement($event)"></entitlement-listing>
+
+<div *ngIf="!user.clientExists">
+  <div>Client must be registered before user entitlements can be modified</div>
+  <button type="button" (click)="registerClient()">Register Client</button>
+</div>
+
+<div *ngIf="user.clientExists && !user.userExists">
+  <div>User must be registered before entitlements can be modified</div>
+  <button type="button" (click)="registerUser()">Register User</button>
+</div>
+<h3>Grant user entitlement</h3>
+<entitlement-form *ngIf="user.clientExists && user.userExists" (onSubmit)="onUserEntitlementSubmitted($event)"></entitlement-form>

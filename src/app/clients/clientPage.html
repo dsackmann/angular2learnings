@@ -1,0 +1,15 @@
+<h3>Users:</h3>
+<div *ngIf="users.length == 0">None</div>
+<user-row *ngFor="#user of users" [user]="user"></user-row>
+
+<h3>Client Entitlements</h3>
+<div *ngIf="clientEnts.length === 0">None</div>
+<entitlement-listing *ngFor="#clientEnt of clientEnts" [entitlement]="clientEnt" (onRevoke)="revokeClientEntitlement($event)"></entitlement-listing>
+
+<div *ngIf="!client.clientExists">
+  <div>Client must be registered before client entitlements can be modified</div>
+  <button type="button" (click)="registerClient()">Register Client</button>
+</div>
+
+<h3>Grant client entitlement</h3>
+<entitlement-form *ngIf="client.clientExists" (onSubmit)="onClientEntitlementSubmitted($event)"></entitlement-form>
